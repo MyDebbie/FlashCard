@@ -6,7 +6,7 @@
 Flashcard is an Android application that show a question to the user and allow him to see the answer.
 
 ### App Walk-though
-<img src="flashcard.gif" width=200><br>
+<img src="flashcard1.gif" width=200><br>
 
 ## Required
 - [x] Create New Project in Android Studio
