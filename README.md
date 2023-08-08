@@ -6,7 +6,7 @@
 Flashcard is an Android application that show a question to the user and allow him to see the answer.
 
 ### App Walk-though
-<img src="flashcard.gif" width=200><br>
+<img src="flashcard1.gif" width=200><br>
 
 ## Required
 - [x] Create New Project in Android Studio
@@ -15,8 +15,8 @@ Flashcard is an Android application that show a question to the user and allow h
 - [x] Build in logic to show the answer side when the card is tapped
 - [x] Push code to GitHub
 ## Optional
-- [ ] toggle the flashcard between the question side and the answer side
-- [ ] Style the question and answer side of the card to better distinguish between the two sides
-- [ ] Add selectable multiple choice answers beneath the card
-- [ ] Change the background color of the multiple choice answers when clicked to indicate whether the question waanswered correctly
-- [ ] Further customize and style the card
+- [x] toggle the flashcard between the question side and the answer side
+- [x] Style the question and answer side of the card to better distinguish between the two sides
+- [x] Add selectable multiple choice answers beneath the card
+- [x] Change the background color of the multiple choice answers when clicked to indicate whether the question waanswered correctly
+- [x] Further customize and style the card
