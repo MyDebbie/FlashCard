@@ -3,7 +3,7 @@
 ## Lab 2
 
 ### App Description
-Flashcard is an Android application that show a question to the user, allow him to see the answer and he can post a question and an answer also.
+Flashcard is an Android application that show a question to the user, allow him to see the answer and he can post, edit a question and an answer also.
 
 ### App Walk-though
 
