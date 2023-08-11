@@ -3,11 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable-v24/cancel.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable-v24/edit.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable-v24/hide.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable-v24/save.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable-v24/show.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable/add.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable/answer_shape.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable/flashcard_shape.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable/ic_launcher_background.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/drawable/question_shape.xml" value="0.217" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/layout/activity_add_card.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Debbie/AndroidStudioProjects/FlashCard/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

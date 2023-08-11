@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">FlashCard</string>
+    <string name="toast_message">Must Enter Both question and Answer</string>
+    <string name="snackbar_message">Card successfully created</string>
+    <string name="flashcard_question">Who is the 44th President of the United States?</string>
+    <string name="flashcard_answer0">Bill Clinton</string>
+    <string name="flashcard_answer1">Barack Obama</string>
+    <string name="flashcard_answer2">George H. W. Bush</string>
+    <string name="hint_flashcard_question">Enter The Question Here</string>
+    <string name="hint_flashcard_answer0">Enter Wrong Answer Option Here</string>
+    <string name="hint_flashcard_answer1">Enter The Answer Here</string>
+    <string name="hint_flashcard_answer2">Enter Another Wrong Answer Option Here</string>
+
+
+
 </resources>
