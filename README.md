@@ -3,7 +3,7 @@
 ## Lab 2
 
 ### App Description
-Flashcard is an Android application that show a question to the user, allow him to see the answer and he can post a question and an answer also.
+Flashcard is an Android application that show a question to the user, allow him to see the answer and he can post, edit a question and an answer also.
 
 ### App Walk-though
 
@@ -18,11 +18,11 @@ Flashcard is an Android application that show a question to the user, allow him 
 - [x] Push your progress to GitHub!
 
 ## Optional
-- [ ] User can edit a card
-- [ ] An error message is shown if the user doesn't enter both a Question and an Answer
-- [ ] A notification is shown if the card was created successfully
-- [ ] User can also enter multiple choice answers when creating a card
-- [ ] App is further styled and customized!
+- [x] User can edit a card
+- [x] An error message is shown if the user doesn't enter both a Question and an Answer
+- [x] A notification is shown if the card was created successfully
+- [x] User can also enter multiple choice answers when creating a card
+- [x] App is further styled and customized!
 
 
 ## Lab 1
