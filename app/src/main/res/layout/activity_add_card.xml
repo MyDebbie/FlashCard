@@ -21,20 +21,10 @@
 
 
     <EditText
-        android:id="@+id/etAnswer0"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_margin="20dp"
-        android:layout_below="@id/etQuestion"
-        android:inputType="textMultiLine"
-        android:hint="@string/hint_flashcard_answer0"/>
-
-
-    <EditText
         android:id="@+id/etAnswer1"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_below="@id/etAnswer0"
+        android:layout_below="@id/etQuestion"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
@@ -42,16 +32,6 @@
         android:hint="@string/hint_flashcard_answer1"
         android:inputType="textMultiLine" />
 
-    <EditText
-        android:id="@+id/etAnswer2"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_below="@id/etAnswer1"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="@string/hint_flashcard_answer2"
-        android:inputType="textMultiLine" />
 
 
     <ImageView
