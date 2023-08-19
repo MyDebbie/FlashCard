@@ -2,6 +2,7 @@
     <string name="app_name">FlashCard</string>
     <string name="toast_message">Must Enter Both question and Answer</string>
     <string name="snackbar_message">Card successfully created</string>
+    <string name="EmptyStates_message">There is no card</string>
     <string name="flashcard_question">Who is the 44th President of the United States?</string>
     <string name="flashcard_answer0">Bill Clinton</string>
     <string name="flashcard_answer1">Barack Obama</string>

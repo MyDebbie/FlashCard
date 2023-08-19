@@ -10,21 +10,33 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 
 class AddCardActivity : AppCompatActivity() {
+
+    private lateinit var ivcancel: ImageView
+    private lateinit var ivsave: ImageView
+    private lateinit var etquestion: EditText
+    private lateinit var etanswer0: EditText
+    private lateinit var etanswer1: EditText
+    private lateinit var etanswer2: EditText
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_card)
 
 
 
-        val ivcancel = findViewById<ImageView>(R.id.ivCancel)
-        val ivsave = findViewById<ImageView>(R.id.ivSave)
-
-        val etquestion = findViewById<EditText>(R.id.etQuestion)
-        val etanswer1 = findViewById<EditText>(R.id.etAnswer1)
+        ivcancel = findViewById(R.id.ivCancel)
+        ivsave = findViewById(R.id.ivSave)
+        etquestion = findViewById(R.id.etQuestion)
+        etanswer0 = findViewById(R.id.etAnswer0)
+        etanswer1 = findViewById(R.id.etAnswer1)
+        etanswer2 = findViewById(R.id.etAnswer2)
 
 
         etquestion.setText(intent.getStringExtra("question_edit"))
+        etanswer0.setText(intent.getStringExtra("answer_edit0"))
         etanswer1.setText(intent.getStringExtra("answer_edit1"))
+        etanswer2.setText(intent.getStringExtra("answer_edit2"))
 
 
 
@@ -32,7 +44,9 @@ class AddCardActivity : AppCompatActivity() {
             val data = Intent()
 
             val etquestion = etquestion.text.toString()
+            val etanswer0 = etanswer0.text.toString()
             val etanswer1 = etanswer1.text.toString()
+            val etanswer2 = etanswer2.text.toString()
 
 
             if(etquestion.isEmpty() or etanswer1.isEmpty()){
@@ -41,7 +55,9 @@ class AddCardActivity : AppCompatActivity() {
             else{
 
                 data.putExtra("question", etquestion)
+                data.putExtra("answer0", etanswer0)
                 data.putExtra("answer1", etanswer1)
+                data.putExtra("answer2", etanswer2)
 
                 setResult(RESULT_OK, data)
 
