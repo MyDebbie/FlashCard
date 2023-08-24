@@ -17,58 +17,56 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:elevation="10dp"
-        android:background="@drawable/question_shape"
         android:gravity="center"
         android:text="@string/flashcard_question"
         android:textColor="@color/black"
         android:textSize="40sp" />
 
 
-    <TextView
-        android:id="@+id/tvAnswer0"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvQuestion"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/answer_shape"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:text="@string/flashcard_answer0"
-        android:textColor="@color/black"
-        android:textSize="25sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvAnswer0"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tvQuestion"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:background="@drawable/answer_shape"-->
+<!--        android:elevation="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/flashcard_answer0"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="25sp" />-->
 
     <TextView
         android:id="@+id/tvAnswer1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvAnswer0"
+        android:layout_height="200dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="20dp"
         android:elevation="10dp"
         android:gravity="center"
-        android:background="@drawable/answer_shape"
         android:text="@string/flashcard_answer1"
+        android:visibility="gone"
         android:textColor="@color/black"
-        android:textSize="25sp" />
+        android:textSize="40sp" />
 
 
-    <TextView
-        android:id="@+id/tvAnswer2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvAnswer1"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/answer_shape"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:text="@string/flashcard_answer2"
-        android:textColor="@color/black"
-        android:textSize="25sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvAnswer2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tvAnswer1"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:background="@drawable/answer_shape"-->
+<!--        android:elevation="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/flashcard_answer2"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="25sp" />-->
 
 
 
@@ -92,35 +90,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@id/tvAnswer2"
+        android:layout_below="@id/tvQuestion"
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/next" />
 
 
-    <ImageView
-        android:id="@+id/ivDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvAnswer2"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/delete" />
+<!--    <ImageView-->
+<!--        android:id="@+id/ivDelete"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tvAnswer2"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_marginStart="250dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:src="@drawable/delete" />-->
 
 
 
-    <ImageView
-        android:id="@+id/ivEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="250dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/edit" />
+<!--    <ImageView-->
+<!--        android:id="@+id/ivEdit"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginTop="250dp"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:src="@drawable/edit" />-->
 
 
 

@@ -3,11 +3,9 @@ package com.example.flashcard
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatEditText
 
 class AddCardActivity : AppCompatActivity() {
 
@@ -28,15 +26,17 @@ class AddCardActivity : AppCompatActivity() {
         ivcancel = findViewById(R.id.ivCancel)
         ivsave = findViewById(R.id.ivSave)
         etquestion = findViewById(R.id.etQuestion)
-        etanswer0 = findViewById(R.id.etAnswer0)
+//        etanswer0 = findViewById(R.id.etAnswer0)
         etanswer1 = findViewById(R.id.etAnswer1)
-        etanswer2 = findViewById(R.id.etAnswer2)
+//        etanswer2 = findViewById(R.id.etAnswer2)
+
+
 
 
         etquestion.setText(intent.getStringExtra("question_edit"))
-        etanswer0.setText(intent.getStringExtra("answer_edit0"))
+//        etanswer0.setText(intent.getStringExtra("answer_edit0"))
         etanswer1.setText(intent.getStringExtra("answer_edit1"))
-        etanswer2.setText(intent.getStringExtra("answer_edit2"))
+//        etanswer2.setText(intent.getStringExtra("answer_edit2"))
 
 
 
@@ -44,9 +44,9 @@ class AddCardActivity : AppCompatActivity() {
             val data = Intent()
 
             val etquestion = etquestion.text.toString()
-            val etanswer0 = etanswer0.text.toString()
+//            val etanswer0 = etanswer0.text.toString()
             val etanswer1 = etanswer1.text.toString()
-            val etanswer2 = etanswer2.text.toString()
+//            val etanswer2 = etanswer2.text.toString()
 
 
             if(etquestion.isEmpty() or etanswer1.isEmpty()){
@@ -55,9 +55,9 @@ class AddCardActivity : AppCompatActivity() {
             else{
 
                 data.putExtra("question", etquestion)
-                data.putExtra("answer0", etanswer0)
+//                data.putExtra("answer0", etanswer0)
                 data.putExtra("answer1", etanswer1)
-                data.putExtra("answer2", etanswer2)
+//                data.putExtra("answer2", etanswer2)
 
                 setResult(RESULT_OK, data)
 
@@ -67,6 +67,8 @@ class AddCardActivity : AppCompatActivity() {
 
         ivcancel.setOnClickListener(){
             finish()
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+
         }
 
     }

@@ -1,21 +1,19 @@
 package com.example.flashcard
 
 import android.app.Activity
-import android.app.ProgressDialog.show
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
-import android.widget.EditText
+import android.view.ViewAnimationUtils
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
+import kotlin.math.hypot
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,35 +40,34 @@ class MainActivity : AppCompatActivity() {
 
 
         tvQuestion = findViewById(R.id.tvQuestion)
-        tvAnswer0 = findViewById(R.id.tvAnswer0)
+//        tvAnswer0 = findViewById(R.id.tvAnswer0)
         tvAnswer1 = findViewById(R.id.tvAnswer1)
-        tvAnswer2 = findViewById(R.id.tvAnswer2)
+//        tvAnswer2 = findViewById(R.id.tvAnswer2)
         tvEmptyStates = findViewById(R.id.tvEmptyStates)
-        ivEdit = findViewById(R.id.ivEdit)
+//        ivEdit = findViewById(R.id.ivEdit)
         ivAdd = findViewById(R.id.ivAdd)
         ivNext = findViewById(R.id.ivNext)
-        ivDelete  = findViewById(R.id.ivDelete)
+//        ivDelete  = findViewById(R.id.ivDelete)
 
         flashcardDatabase = FlashcardDatabase(this)
         allFlashcards = flashcardDatabase.getAllCards().toMutableList()
 
-
-
         if (allFlashcards.size > 0) {
             tvQuestion.text = allFlashcards[0].question
-            tvAnswer0.text = allFlashcards[0].wrongAnswer1
+//            tvAnswer0.text = allFlashcards[0].wrongAnswer1
             tvAnswer1.text = allFlashcards[0].answer
-            tvAnswer2.text = allFlashcards[0].wrongAnswer2
+//            tvAnswer2.text = allFlashcards[0].wrongAnswer2
 
         }
-
-
 
         ivNext.setOnClickListener {
             if (allFlashcards.size == 0) {
                 return@setOnClickListener
             }
             else {
+                tvQuestion.visibility = View.VISIBLE
+                tvAnswer1.visibility = View.INVISIBLE
+
                 var randomIndex = getRandomNumber(0, allFlashcards.size - 1)
 
                 while (randomIndex == currentCardDisplayedIndex) {
@@ -83,43 +80,80 @@ class MainActivity : AppCompatActivity() {
                 allFlashcards = flashcardDatabase.getAllCards().toMutableList()
                 val (question, answer0, answer1, answer2) = allFlashcards[randomIndex]
 
+                val leftOutAnim = AnimationUtils.loadAnimation(this, R.anim.left_out)
+                val rightInAnim = AnimationUtils.loadAnimation(this, R.anim.right_in)
+
                 tvQuestion.text = question
-                tvAnswer0.text = answer0
                 tvAnswer1.text = answer1
-                tvAnswer2.text = answer2
+                tvAnswer1.visibility = View.VISIBLE
+
+                leftOutAnim.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation?) {
+                        tvQuestion.startAnimation(leftOutAnim)
+
+                    }
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        tvQuestion.text = question
+                        //                tvAnswer0.text = answer0
+                        tvAnswer1.text = answer1
+                        //                tvAnswer2.text = answer2
+                        tvQuestion.startAnimation(rightInAnim)
+                    }
+
+                    override fun onAnimationRepeat(animation: Animation?) {}
+                })
+
+                tvQuestion.startAnimation(leftOutAnim)
+//                tvQuestion.visibility = View.INVISIBLE
+//                tvAnswer1.visibility = View.VISIBLE
 
             }
         }
 
+        tvQuestion.setOnClickListener {
 
-        ivDelete.setOnClickListener {
+            val cx = tvQuestion.width / 2
+            val cy = tvQuestion.height / 2
+            val finalRadius = hypot(cx.toDouble(), cy.toDouble()).toFloat()
+            val anim = ViewAnimationUtils.createCircularReveal(tvAnswer1, cx, cy, 0f, finalRadius)
 
-            flashcardDatabase.deleteCard(tvQuestion.text.toString())
-            Snackbar.make(
-                findViewById<TextView>(R.id.tvQuestion),
-                "Deleted.",
-                Snackbar.LENGTH_SHORT)
-                .show()
-            allFlashcards = flashcardDatabase.getAllCards().toMutableList()
+            tvQuestion.visibility = View.INVISIBLE
+            tvAnswer1.visibility = View.VISIBLE
 
-            if (allFlashcards.size == 0) {
-                EmptyState_Show()
-
-            } else {
-                EmptyState_Hide()
-
-
-                val randomIndex = getRandomNumber(0, allFlashcards.size - 1)
-                val (question, answer0, answer1, answer2) = allFlashcards[randomIndex]
-
-                tvQuestion.text = question
-                tvAnswer0.text = answer0
-                tvAnswer1.text = answer1
-                tvAnswer2.text = answer2
-
-            }
-
+            anim.duration = 600
+            anim.start()
         }
+
+
+//        ivDelete.setOnClickListener {
+//
+//            flashcardDatabase.deleteCard(tvQuestion.text.toString())
+//            Snackbar.make(
+//                findViewById<TextView>(R.id.tvQuestion),
+//                "Deleted.",
+//                Snackbar.LENGTH_SHORT)
+//                .show()
+//            allFlashcards = flashcardDatabase.getAllCards().toMutableList()
+//
+//            if (allFlashcards.size == 0) {
+//                EmptyState_Show()
+//
+//            } else {
+//                EmptyState_Hide()
+//
+//
+//                val randomIndex = getRandomNumber(0, allFlashcards.size - 1)
+//                val (question, answer0, answer1, answer2) = allFlashcards[randomIndex]
+//
+//                tvQuestion.text = question
+//                tvAnswer0.text = answer0
+//                tvAnswer1.text = answer1
+//                tvAnswer2.text = answer2
+//
+//            }
+//
+//        }
 
 
         val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -128,15 +162,15 @@ class MainActivity : AppCompatActivity() {
 
                 if (data != null) {
                     val question = data.getStringExtra("question")
-                    val answer0 = data.getStringExtra("answer0")
+//                    val answer0 = data.getStringExtra("answer0")
                     val answer1 = data.getStringExtra("answer1")
-                    val answer2 = data.getStringExtra("answer2")
+//                    val answer2 = data.getStringExtra("answer2")
 
 
                     tvQuestion.text = question
-                    tvAnswer0.text = answer0
+//                    tvAnswer0.text = answer0
                     tvAnswer1.text = answer1
-                    tvAnswer2.text = answer2
+//                    tvAnswer2.text = answer2
 
 
                     flashcardDatabase.insertCard(Flashcard(question.toString(), answer1.toString()))
@@ -146,8 +180,8 @@ class MainActivity : AppCompatActivity() {
 
 
                     // Save newly created flashcard to database
-                    if (question != null && answer0 != null && answer1 != null && answer2 != null) {
-                        flashcardDatabase.insertCard(Flashcard(question, answer0, answer1, answer2))
+                    if (question != null && answer1 != null) {
+                        flashcardDatabase.insertCard(Flashcard(question, answer1))
 
                         // Update set of flashcards to include new card
                         allFlashcards = flashcardDatabase.getAllCards().toMutableList()
@@ -170,28 +204,28 @@ class MainActivity : AppCompatActivity() {
             if (data != null) {
 
                 val question = data.getStringExtra("question")
-                val answer0 = data.getStringExtra("answer0")
+//                val answer0 = data.getStringExtra("answer0")
                 val answer1 = data.getStringExtra("answer1")
-                val answer2 = data.getStringExtra("answer2")
+//                val answer2 = data.getStringExtra("answer2")
 
 
                 tvQuestion.text = question
-                tvAnswer0.text = answer0
+//                tvAnswer0.text = answer0
                 tvAnswer1.text = answer1
-                tvAnswer2.text = answer2
+//                tvAnswer2.text = answer2
 
                 if (question != null) {
                     cardToEdit!!.question = question
                 }
-                if (answer0 != null) {
-                    cardToEdit!!.wrongAnswer1 = answer0
-                }
+//                if (answer0 != null) {
+//                    cardToEdit!!.wrongAnswer1 = answer0
+//                }
                 if (answer1 != null) {
                     cardToEdit!!.answer = answer1
                 }
-                if (answer2 != null) {
-                    cardToEdit!!.wrongAnswer2 = answer2
-                }
+//                if (answer2 != null) {
+//                    cardToEdit!!.wrongAnswer2 = answer2
+//                }
 
                 flashcardDatabase.updateCard(cardToEdit!!)
 
@@ -201,39 +235,40 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        ivEdit.setOnClickListener() {
-
-            val intent = Intent(this, AddCardActivity::class.java)
-
-
-//            val question_text = tvQuestion.text.toString()
-//            val answer_text1 = tvAnswer1.text.toString()
-
-            val currentQuestion = tvQuestion.text.toString()
-            val currentAnswer0 = tvAnswer0.text.toString()
-            val currentAnswer1 = tvAnswer1.text.toString()
-            val currentAnswer2 = tvAnswer2.text.toString()
-
-            cardToEdit = allFlashcards.find { it.question == currentQuestion }
-//            cardToEdit = allFlashcards.find { it.answer == currentAnswer0 }
-//            cardToEdit = allFlashcards.find { it.answer == currentAnswer1 }
-//            cardToEdit = allFlashcards.find { it.answer == currentAnswer2 }
-
-
-
-            intent.putExtra("question_edit", currentQuestion);
-            intent.putExtra("answer_edit0", currentAnswer0);
-            intent.putExtra("answer_edit1", currentAnswer1);
-            intent.putExtra("answer_edit2", currentAnswer2);
-
-
-            editResultLauncher.launch(intent)
-        }
+//        ivEdit.setOnClickListener() {
+//
+//            val intent = Intent(this, AddCardActivity::class.java)
+//
+//
+////            val question_text = tvQuestion.text.toString()
+////            val answer_text1 = tvAnswer1.text.toString()
+//
+//            val currentQuestion = tvQuestion.text.toString()
+//            val currentAnswer0 = tvAnswer0.text.toString()
+//            val currentAnswer1 = tvAnswer1.text.toString()
+//            val currentAnswer2 = tvAnswer2.text.toString()
+//
+//            cardToEdit = allFlashcards.find { it.question == currentQuestion }
+////            cardToEdit = allFlashcards.find { it.answer == currentAnswer0 }
+////            cardToEdit = allFlashcards.find { it.answer == currentAnswer1 }
+////            cardToEdit = allFlashcards.find { it.answer == currentAnswer2 }
+//
+//
+//
+//            intent.putExtra("question_edit", currentQuestion);
+//            intent.putExtra("answer_edit0", currentAnswer0);
+//            intent.putExtra("answer_edit1", currentAnswer1);
+//            intent.putExtra("answer_edit2", currentAnswer2);
+//
+//
+//            editResultLauncher.launch(intent)
+//        }
 
 
         ivAdd.setOnClickListener() {
             val intent = Intent(this, AddCardActivity::class.java)
             resultLauncher.launch(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
 
 
