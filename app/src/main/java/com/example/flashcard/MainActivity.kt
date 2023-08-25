@@ -167,6 +167,11 @@ class MainActivity : AppCompatActivity() {
                 tvAnswer0.text = answer0
                 tvAnswer1.text = answer1
                 tvAnswer2.text = answer2
+                tvAnswer0.setBackgroundColor(resources.getColor(R.color.blue, null))
+                tvAnswer1.setBackgroundColor(resources.getColor(R.color.blue, null))
+                tvAnswer2.setBackgroundColor(resources.getColor(R.color.blue, null))
+
+
 
             }
 
