@@ -60,56 +60,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        ivNext.setOnClickListener {
-            if (allFlashcards.size == 0) {
-                return@setOnClickListener
-            }
-            else {
-                tvQuestion.visibility = View.VISIBLE
-                tvAnswer1.visibility = View.INVISIBLE
-
-                var randomIndex = getRandomNumber(0, allFlashcards.size - 1)
-
-                while (randomIndex == currentCardDisplayedIndex) {
-                    randomIndex = getRandomNumber(0, allFlashcards.size - 1)
-                }
-
-                currentCardDisplayedIndex = randomIndex
-
-
-                allFlashcards = flashcardDatabase.getAllCards().toMutableList()
-                val (question, answer0, answer1, answer2) = allFlashcards[randomIndex]
-
-                val leftOutAnim = AnimationUtils.loadAnimation(this, R.anim.left_out)
-                val rightInAnim = AnimationUtils.loadAnimation(this, R.anim.right_in)
-
-                tvQuestion.text = question
-                tvAnswer1.text = answer1
-                tvAnswer1.visibility = View.VISIBLE
-
-                leftOutAnim.setAnimationListener(object : Animation.AnimationListener {
-                    override fun onAnimationStart(animation: Animation?) {
-                        tvQuestion.startAnimation(leftOutAnim)
-
-                    }
-
-                    override fun onAnimationEnd(animation: Animation?) {
-                        tvQuestion.text = question
-                        //                tvAnswer0.text = answer0
-                        tvAnswer1.text = answer1
-                        //                tvAnswer2.text = answer2
-                        tvQuestion.startAnimation(rightInAnim)
-                    }
-
-                    override fun onAnimationRepeat(animation: Animation?) {}
-                })
-
-                tvQuestion.startAnimation(leftOutAnim)
-//                tvQuestion.visibility = View.INVISIBLE
-//                tvAnswer1.visibility = View.VISIBLE
-
-            }
-        }
 
         tvQuestion.setOnClickListener {
 
@@ -124,6 +74,57 @@ class MainActivity : AppCompatActivity() {
             anim.duration = 600
             anim.start()
         }
+
+
+        ivNext.setOnClickListener {
+
+            if (allFlashcards.size == 0) {
+                return@setOnClickListener
+            }
+            else {
+                var randomIndex = getRandomNumber(0, allFlashcards.size - 1)
+
+                while (randomIndex == currentCardDisplayedIndex) {
+                    randomIndex = getRandomNumber(0, allFlashcards.size - 1)
+                }
+
+                currentCardDisplayedIndex = randomIndex
+
+                tvQuestion.visibility = View.VISIBLE
+                tvAnswer1.visibility = View.INVISIBLE
+
+                allFlashcards = flashcardDatabase.getAllCards().toMutableList()
+                val (question, answer1) = allFlashcards[randomIndex]
+
+
+                val leftOutAnim = AnimationUtils.loadAnimation(this, R.anim.left_out)
+                val rightInAnim = AnimationUtils.loadAnimation(this, R.anim.right_in)
+
+                leftOutAnim.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation?) {
+                        tvQuestion.startAnimation(leftOutAnim)
+
+                    }
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        tvQuestion.startAnimation(rightInAnim)
+
+                    }
+
+                    override fun onAnimationRepeat(animation: Animation?) {
+
+                    }
+                })
+                tvQuestion.startAnimation(leftOutAnim)
+
+                tvQuestion.text = question
+//                tvAnswer0.text = answer0
+                tvAnswer1.text = answer1
+//                tvAnswer2.text = answer2
+
+            }
+        }
+
 
 
 //        ivDelete.setOnClickListener {
