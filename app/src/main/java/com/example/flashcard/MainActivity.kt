@@ -37,13 +37,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var ivAdd: ImageView
     private lateinit var ivNext: ImageView
     private lateinit var ivDelete: ImageView
-    private lateinit var viewKonfetti: KonfettiView
+    private lateinit var tvTimer: TextView
+    private lateinit var KfView: KonfettiView
+    private var previousRandomIndex: Int = -1
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         tvQuestion = findViewById(R.id.tvQuestion)
         tvAnswer0 = findViewById(R.id.tvAnswer0)
@@ -54,16 +57,23 @@ class MainActivity : AppCompatActivity() {
         ivAdd = findViewById(R.id.ivAdd)
         ivNext = findViewById(R.id.ivNext)
         ivDelete  = findViewById(R.id.ivDelete)
-        viewKonfetti = findViewById(R.id.konfettiView)
+        KfView = findViewById(R.id.kfView)
+        tvTimer = findViewById(R.id.tvTimer)
 
-
+        startTimer()
 
         flashcardDatabase = FlashcardDatabase(this)
         allFlashcards = flashcardDatabase.getAllCards().toMutableList()
 
+        countDownTimer = object : CountDownTimer(16000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                tvTimer.text = "" + millisUntilFinished / 1000
+            }
+
+            override fun onFinish() {}
+        }
 
         if (allFlashcards.size > 0) {
-
             startTimer()
             tvQuestion.text = allFlashcards[0].question
             tvAnswer0.text = allFlashcards[0].wrongAnswer1
@@ -73,16 +83,36 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+//
+//        tvQuestion.setOnClickListener {
+//            tvQuestion.animate()
+//                .rotationY(90f)
+//                .setDuration(200)
+//                .withEndAction(
+//                    Runnable {
+//                        tvQuestion.setVisibility(View.INVISIBLE)
+//                        tvAnswer1.visibility = View.VISIBLE
+//                        // second quarter turn
+//                        tvAnswer1.rotationY = -90f
+//                        tvAnswer1.animate()
+//                            .rotationY(0f)
+//                            .setDuration(200)
+//                            .start()
+//                    }
+//                ).start()
+//            tvQuestion.setCameraDistance(25000f)
+//            tvAnswer1.setCameraDistance(25000f)
+//
+//        }
+
+
         answerCelebration()
 
 
         tvAnswer0.setOnClickListener {
             tvAnswer0.setBackgroundColor(getColor(R.color.red))
         }
-
-//        tvAnswer1.setOnClickListener {
-//            tvAnswer1.setBackgroundColor(getColor(R.color.green))
-//        }
         tvAnswer2.setOnClickListener {
             tvAnswer2.setBackgroundColor(getColor(R.color.red))
         }
@@ -95,18 +125,19 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             else {
+                startTimer()
+
                 var randomIndex = getRandomNumber(0, allFlashcards.size - 1)
 
                 while (randomIndex == currentCardDisplayedIndex) {
                     randomIndex = getRandomNumber(0, allFlashcards.size - 1)
                 }
 
-                currentCardDisplayedIndex = randomIndex
 
-                tvQuestion.visibility = View.VISIBLE
-                tvAnswer1.visibility = View.INVISIBLE
-                tvAnswer1.rotationY = 90f
-                tvQuestion.rotationY = 0f
+//                tvQuestion.visibility = View.VISIBLE
+//                tvAnswer1.visibility = View.INVISIBLE
+//                tvAnswer1.rotationY = 90f
+//                tvQuestion.rotationY = 0f
 
                 allFlashcards = flashcardDatabase.getAllCards().toMutableList()
                 val (question, answer0, answer1, answer2) = allFlashcards[randomIndex]
@@ -131,7 +162,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
                 tvQuestion.startAnimation(leftOutAnim)
-//                startTimer()
 
                 tvQuestion.text = question
                 tvAnswer0.text = answer0
@@ -139,6 +169,7 @@ class MainActivity : AppCompatActivity() {
                 tvAnswer2.text = answer2
 
             }
+
         }
 
 
@@ -256,10 +287,6 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, AddCardActivity::class.java)
 
-
-//            val question_text = tvQuestion.text.toString()
-//            val answer_text1 = tvAnswer1.text.toString()
-
             val currentQuestion = tvQuestion.text.toString()
             val currentAnswer0 = tvAnswer0.text.toString()
             val currentAnswer1 = tvAnswer1.text.toString()
@@ -302,17 +329,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun answerCelebration(){
         val party = Party(
-                speed = 0f,
-                maxSpeed = 30f,
-                damping = 0.9f,
-                spread = 360,
-                colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
-                emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100),
-                position = Position.Relative(0.5, 0.1)
+            speed = 0f,
+            maxSpeed = 30f,
+            damping = 0.9f,
+            spread = 360,
+            colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
+            emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100),
+            position = Position.Relative(0.5, 0.1)
         )
         tvAnswer1.setOnClickListener {
             tvAnswer1.setBackgroundColor(getColor(R.color.green))
-            viewKonfetti.start(party)
+            KfView.start(party)
 
         }
     }
@@ -326,6 +353,7 @@ class MainActivity : AppCompatActivity() {
         ivNext.visibility = View.INVISIBLE
         ivDelete.visibility = View.INVISIBLE
         ivEdit.visibility = View.INVISIBLE
+        tvTimer.visibility = View.INVISIBLE
         tvEmptyStates.visibility = View.VISIBLE
     }
     fun EmptyState_Hide(){
@@ -337,6 +365,7 @@ class MainActivity : AppCompatActivity() {
         ivNext.visibility = View.VISIBLE
         ivDelete.visibility = View.VISIBLE
         ivEdit.visibility = View.VISIBLE
+        tvTimer.visibility = View.VISIBLE
         tvEmptyStates.visibility = View.INVISIBLE
     }
 
